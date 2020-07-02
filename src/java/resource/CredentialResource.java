@@ -37,7 +37,7 @@ public class CredentialResource {
         if(filterBean.getStart()>= 0 && filterBean.getSize()> 0){
             return credentialService.getAllPaginated(filterBean.getStart(), filterBean.getSize());
         }
-        System.out.print("getAll");
+        
         return credentialService.getAll();
     }
       
@@ -48,6 +48,7 @@ public class CredentialResource {
         return credentialService.get(id);
     }
     
+    @Authorize
     @POST
     public Response save(Credential credential, @Context UriInfo uriInfo){
         Credential newCredential = credentialService.save(credential);
@@ -56,6 +57,7 @@ public class CredentialResource {
         return Response.created(url).entity(newCredential).build();
     }
     
+    @Authorize
     @PUT
     @Path("/{id}")
     public Response update(@PathParam("id") long id, Credential credential, @Context UriInfo uriInfo){
@@ -64,6 +66,7 @@ public class CredentialResource {
         return Response.created(uriInfo.getAbsolutePath()).entity(newCredential).build();
     }
     
+    @Authorize
     @DELETE
     @Path("/{id}")
     public void deleteFuncionario(@PathParam("id") long id){
