@@ -26,8 +26,7 @@ public class LoginResource {
     public Response login(Credential credential, @Context UriInfo uriInfo){
         URI url = uriInfo.getAbsolutePathBuilder().build();
         List<Credential> validCredential = credentialService.getByUser(credential.getUser());
-        System.out.print(credential.getUser());
-        System.out.print(validCredential);
+        
         
         try{
             if(validCredential.isEmpty()){
@@ -37,7 +36,8 @@ public class LoginResource {
             if(validCredential.get(0).getPassword().equals(credential.getPassword())){
                 Algorithm chave = Algorithm.HMAC256("secret");
                 String jwtToken = JWT.create().withIssuer("auth0").sign(chave);
-
+                System.out.print(credential.getUser());
+                System.out.print(credential.getPassword());
                 return Response.status(Response.Status.OK).entity(jwtToken).build();
             }else{
                 return Response.status(Response.Status.UNAUTHORIZED).entity("Senha inválida.").location(url).build();

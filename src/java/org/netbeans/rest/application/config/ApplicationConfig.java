@@ -14,7 +14,7 @@ import javax.ws.rs.core.Application;
  * @author Harley
  */
 @javax.ws.rs.ApplicationPath("api")
-public class ApplicationConfig extends Application {
+public class ApplicationConfig extends Application{
 
     @Override
     public Set<Class<?>> getClasses() {
