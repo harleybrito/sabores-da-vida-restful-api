@@ -30,9 +30,11 @@ public class ApplicationConfig extends Application{
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(org.netbeans.rest.application.config.CorsFilter.class);
         resources.add(authorization.AuthorizeFilter.class);
         resources.add(exception.DataNotFoundExceptionMapper.class);
         resources.add(resource.CredentialResource.class);
+        resources.add(resource.HomeResource.class);
         resources.add(resource.LoginResource.class);
     }
     

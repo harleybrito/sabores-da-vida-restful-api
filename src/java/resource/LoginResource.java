@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import model.Credential;
+import model.Token;
 import service.CredentialService;
 
 @Path("/login")
@@ -35,10 +36,11 @@ public class LoginResource {
             
             if(validCredential.get(0).getPassword().equals(credential.getPassword())){
                 Algorithm chave = Algorithm.HMAC256("secret");
-                String jwtToken = JWT.create().withIssuer("auth0").sign(chave);
+                Token token = new Token(JWT.create().withIssuer("auth0").sign(chave));
+                //String jwtToken = JWT.create().withIssuer("auth0").sign(chave);
                 System.out.print(credential.getUser());
                 System.out.print(credential.getPassword());
-                return Response.status(Response.Status.OK).entity(jwtToken).build();
+                return Response.status(Response.Status.OK).entity(token).build();
             }else{
                 return Response.status(Response.Status.UNAUTHORIZED).entity("Senha inválida.").location(url).build();
             }
