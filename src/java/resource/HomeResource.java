@@ -18,7 +18,7 @@ public class HomeResource {
     @Authorize
     @GET
     public Response home(@Context UriInfo uriInfo){
-        System.out.print("/home");
+        System.out.print("home");
         return Response.status(Response.Status.OK).build();
     }
 }

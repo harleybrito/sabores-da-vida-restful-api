@@ -15,7 +15,6 @@ public class CredentialService {
     }
     
     public List<Credential> getByUser(String user){
-        System.out.print(credentials);
         List<Credential> credentialsByUser = new ArrayList<Credential>();
         String credentialUser;
         
