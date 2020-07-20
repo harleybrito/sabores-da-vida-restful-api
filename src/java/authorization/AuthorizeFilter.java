@@ -30,7 +30,7 @@ public class AuthorizeFilter implements ContainerRequestFilter{
             JWTVerifier verifier = JWT.require(chave).withIssuer("auth0").build();
             DecodedJWT jwt = verifier.verify(token);
         }catch(JWTVerificationException exception){
-            System.out.print("Abortado");
+            System.out.print("unnauthorized");
             requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
         }
     }

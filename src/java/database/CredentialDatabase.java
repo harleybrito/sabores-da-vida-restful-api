@@ -20,9 +20,8 @@ public class CredentialDatabase {
             while(data.next()){
                 Credential credential = new Credential();
                 credential.setId(data.getLong(1));
-                credential.setUser(data.getString(2));
-                credential.setPassword(data.getString(3));
-                credential.setSpecial(data.getString(4));
+                credential.setUser(data.getString(3));
+                credential.setPassword(data.getString(4));
                 credentials.put(credential.getId(), credential);
             }
             
@@ -36,10 +35,9 @@ public class CredentialDatabase {
     public static void save(Credential credential){
         try{
             Connection databaseConnection = ConnectionDB.Connect();
-            PreparedStatement statement = databaseConnection.prepareStatement("insert into credential (user, password, special) values (?, ?, ?)");
+            PreparedStatement statement = databaseConnection.prepareStatement("insert into credential (user, password) values (?, ?)");
             statement.setString(1, credential.getUser());
             statement.setString(2, credential.getPassword());
-            statement.setString(3, credential.getSpecial());
             statement.executeUpdate();
             databaseConnection.close();
         }catch(Exception e){
@@ -50,11 +48,10 @@ public class CredentialDatabase {
     public static void update(Credential credential){
         try{
             Connection databaseConnection = ConnectionDB.Connect();
-            PreparedStatement statement = databaseConnection.prepareStatement("update credential set user = ?, password = ?, special = ? where id = ? ");
+            PreparedStatement statement = databaseConnection.prepareStatement("update credential set user = ?, password = ? where id = ? ");
             statement.setString(1, credential.getUser());
             statement.setString(2, credential.getPassword());
-            statement.setString(3, credential.getSpecial());
-            statement.setLong(4, credential.getId());
+            statement.setLong(3, credential.getId());
             statement.executeUpdate();
             databaseConnection.close();
         }catch(Exception e){

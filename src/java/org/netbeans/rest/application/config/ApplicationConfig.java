@@ -34,6 +34,7 @@ public class ApplicationConfig extends Application{
         resources.add(exception.DataNotFoundExceptionMapper.class);
         resources.add(org.netbeans.rest.application.config.CorsFilter.class);
         resources.add(resource.CredentialResource.class);
+        resources.add(resource.EmployeeResource.class);
         resources.add(resource.HomeResource.class);
         resources.add(resource.LoginResource.class);
     }

@@ -29,22 +29,26 @@ public class LoginResource {
     
     @GET
     public Response getUsersString(@BeanParam ApiFilterBean filterBean){
-        System.out.print("login?user=" + filterBean.getUser());
+        System.out.println("login?user=" + filterBean.getUser());
         if(filterBean.getUser()!= null){
             String user = filterBean.getUser();
             List<Credential> found = credentialService.getByUser(user);
             
             if(found.size() > 0){
                 if(found.size() == 1){
+                    System.out.println("ok");
                     return Response.status(Response.Status.OK).entity("true").build();
                 }else{
+                    System.out.println("size = 0");
                     return Response.status(Response.Status.OK).entity("false").build();
                 }
             }else{
+                System.out.println("size > 1");
                 return Response.status(Response.Status.OK).entity("false").build();
             }
             
         }else{
+            System.out.println("no bean params");
             return Response.status(Response.Status.OK).entity("false").build();
         }
     }
@@ -57,14 +61,17 @@ public class LoginResource {
         
         try{
             if(validCredential.isEmpty()){
+                System.out.print("user doesnt exist");
                 return Response.status(Response.Status.UNAUTHORIZED).build();
             }
             
             if(validCredential.get(0).getPassword().equals(credential.getPassword())){
                 Algorithm chave = Algorithm.HMAC256("secret");
                 Token token = new Token(JWT.create().withIssuer("auth0").sign(chave));
+                System.out.print("ok");
                 return Response.status(Response.Status.OK).entity(token).build();
             }else{
+                System.out.print("wrong password");
                 return Response.status(Response.Status.UNAUTHORIZED).build();
             }
         }catch(Exception e){

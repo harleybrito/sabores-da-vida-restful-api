@@ -9,16 +9,14 @@ public class Credential{
     private long id;
     private String user;
     private String password;
-    private String special;
     private Map<Long, Credential> credentials = new HashMap<>();
 
     public Credential() { }
 
-    public Credential(long id, String user, String password, String special) {
+    public Credential(long id, String user, String password) {
         this.id = id;
         this.user = user;
         this.password = password;
-        this.special = special;
     }
 
     public long getId() {
@@ -43,14 +41,6 @@ public class Credential{
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getSpecial() {
-        return special;
-    }
-
-    public void setSpecial(String special) {
-        this.special = special;
     }
 
     @XmlTransient
