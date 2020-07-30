@@ -9,14 +9,24 @@ public class Credential{
     private long id;
     private String user;
     private String password;
+    private long employee_id;
     private Map<Long, Credential> credentials = new HashMap<>();
 
     public Credential() { }
-
-    public Credential(long id, String user, String password) {
+    
+    public Credential(long id, String user, String password, long employee_id) {
         this.id = id;
         this.user = user;
         this.password = password;
+        this.employee_id = employee_id;
+    }
+    
+    public long getEmployee_id() {
+        return employee_id;
+    }
+
+    public void setEmployee_id(long employee_id) {
+        this.employee_id = employee_id;
     }
 
     public long getId() {

@@ -20,8 +20,9 @@ public class CredentialDatabase {
             while(data.next()){
                 Credential credential = new Credential();
                 credential.setId(data.getLong(1));
-                credential.setUser(data.getString(3));
-                credential.setPassword(data.getString(4));
+                credential.setUser(data.getString(2));
+                credential.setPassword(data.getString(3));
+                credential.setEmployee_id(data.getLong(4));
                 credentials.put(credential.getId(), credential);
             }
             
